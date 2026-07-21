@@ -9,6 +9,10 @@ Automated job scraper and AI enrichment dashboard for ETT portals in Barcelona.
 - Auto-discards offers with score below 7 (wrong shift, wrong location, physical work)
 - Shows only relevant offers in a real-time dashboard
 
+## Preview
+
+![Dashboard](docs/screenshot.png)
+
 ## Stack
 
 - Node.js + ES Modules
