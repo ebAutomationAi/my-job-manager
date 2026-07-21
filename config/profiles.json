@@ -1,0 +1,38 @@
+{
+  "RCP": {
+    "keywords": [
+      "recepcionista", "administrativo", "atencion al cliente", "auxiliar administrativo",
+      "back office", "vigilante seguridad", "conserje", "teleoperador inbound",
+      "dependiente", "cajero",
+      "recepcionista nocturno", "botones nocturno", "room service nocturno",
+      "limpiador nocturno", "supervisor limpieza nocturna", "teleoperador nocturno",
+      "customer service nocturno", "telefonista nocturno", "conserje nocturno",
+      "repartidor nocturno", "mensajero nocturno",
+      "auditor nocturno", "night auditor", "portero nocturno",
+      "ayudante recepción nocturna", "preparador pedidos nocturno",
+      "reponedor nocturno", "picking nocturno"
+    ],
+    "exclusions": [
+      "mozo", "almacen", "carga", "descarga", "carretilla", "carretillero",
+      "peon", "construccion", "obra", "VTC", "conductor", "chofer",
+      "camion", "camionero", "trabajo en altura", "soldador",
+      "electricista obra"
+    ],
+    "location": "Barcelona",
+    "urgent": true,
+    "match_threshold": 1
+  },
+  "ECB": {
+    "keywords": [
+      "formador IT", "formador IA", "MCP", "Python", "Docker",
+      "FUNDAE", "certificados de profesionalidad",
+      "instructor tecnico", "formador tecnico",
+      "soporte IT nocturno", "helpdesk nocturno",
+      "operador sistemas nocturno", "técnico soporte nocturno"
+    ],
+    "exclusions": [],
+    "location": "Barcelona",
+    "urgent": false,
+    "match_threshold": 1
+  }
+}

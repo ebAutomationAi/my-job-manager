@@ -1,0 +1,7 @@
+{
+  "concurrency": 2,
+  "delayBetweenRequests": 2000,
+  "headless": true,
+  "timeout": 30000,
+  "maxResultsPerSource": 50
+}

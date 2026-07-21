@@ -1,0 +1,16 @@
+[
+  { "id": "randstad", "name": "Randstad", "url": "...", "enabled": false, "_disabled_reason": "slug URL pattern unstable, needs re-verification" },
+    { "id": "manpower",  "name": "Manpower",  "url": "https://www.manpower.es/es/buscar-trabajo?page=1&searchKeyword=KEYWORD&latitude=41.3874374&longitude=2.1686496&place=Barcelona,+Espa%C3%B1a", "url_incremental": "https://www.manpower.es/es/buscar-trabajo?page=1&searchKeyword=KEYWORD&latitude=41.3874374&longitude=2.1686496&place=Barcelona,+Espa%C3%B1a&datePosted=7" },
+  { "id": "adecco",    "name": "Adecco",    "url": "https://www.adecco.com/es-es/ofertas-trabajo?jobTitle=KEYWORD&jobLocation=Barcelona,+Espa%C3%B1a&radius=20", "url_incremental": "https://www.adecco.com/es-es/ofertas-trabajo?jobTitle=KEYWORD&jobLocation=Barcelona,+Espa%C3%B1a&radius=20&publishedIn=7" },
+  { "id": "infojobs",  "name": "Infojobs",  "url": "https://www.infojobs.net/jobsearch/search-results/list.xhtml?keyword=KEYWORD&provinceIds=9&sortBy=RELEVANCE&countryIds=17&sinceDate=ANY", "url_incremental": "https://www.infojobs.net/jobsearch/search-results/list.xhtml?keyword=KEYWORD&provinceIds=9&sortBy=RELEVANCE&countryIds=17&sinceDate=7" },
+  { "id": "meditempus","name": "Meditempus","url": "https://www.meditempus.com" },
+  { "id": "ananda",    "name": "Ananda Gestión","url": "https://www.ananda.es" },
+  { "id": "tempjob",   "name": "Tempjob",   "url": "https://tempjob.es" },
+  { "id": "iman",      "name": "Iman Temporing","url": "https://www.imancorp.es" },
+  { "id": "catt",      "name": "CATT",      "url": "https://www.catt.es" },
+  { "id": "masterwork","name": "Masterwork ETT","url": "https://masterwork.es" },
+  { "id": "penelope",  "name": "Agencia Penelope","url": "https://www.agenciapenelope.com" },
+  { "id": "synergie",  "name": "Synergie ETT","url": "https://www.synergie.es" },
+  { "id": "faster",    "name": "Faster Barcelona","url": "https://www.fasterempleo.es" },
+  { "id": "dekra",     "name": "Dekra Empleo","url": "https://www.dekra-empleo.com" }
+]
