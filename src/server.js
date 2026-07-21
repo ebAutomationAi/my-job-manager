@@ -95,7 +95,7 @@ function withDb(handler) {
 }
 
 // Middleware
-app.use(express.json());
+app.use(express.json({ limit: '1mb' }));
 app.use(express.static(resolve(__dirname, '../public')));
 // GET /api/stats
 app.get('/api/stats', withDb(async (req, res) => {
@@ -192,7 +192,10 @@ app.get('/api/offers/grouped', withDb(async (req, res) => {
 
 // GET /api/offers/:id
 app.get('/api/offers/:id', withDb(async (req, res) => {
-  const offer = db.prepare('SELECT * FROM offers WHERE id = ?').get(req.params.id);
+  const id = parseInt(req.params.id, 10);
+  if (isNaN(id) || id <= 0) return res.status(400).json({ error: 'Invalid id' });
+
+  const offer = db.prepare('SELECT * FROM offers WHERE id = ?').get(id);
   if (!offer) {
     return res.status(404).json({ error: 'Offer not found' });
   }
@@ -201,12 +204,15 @@ app.get('/api/offers/:id', withDb(async (req, res) => {
 
 // PATCH /api/offers/:id/status
 app.patch('/api/offers/:id/status', withDb(async (req, res) => {
+  const id = parseInt(req.params.id, 10);
+  if (isNaN(id) || id <= 0) return res.status(400).json({ error: 'Invalid id' });
+
   const { status } = req.body;
   if (!status) {
     return res.status(400).json({ error: 'status is required' });
   }
 
-  const result = db.prepare('UPDATE offers SET status = ? WHERE id = ?').run(status, req.params.id);
+  const result = db.prepare('UPDATE offers SET status = ? WHERE id = ?').run(status, id);
   if (result.changes === 0) {
     return res.status(404).json({ error: 'Offer not found' });
   }
@@ -222,12 +228,15 @@ app.get('/api/unenriched', withDb(async (req, res) => {
 
 // POST /api/enrich/:id
 app.post('/api/enrich/:id', withDb(async (req, res) => {
+  const id = parseInt(req.params.id, 10);
+  if (isNaN(id) || id <= 0) return res.status(400).json({ error: 'Invalid id' });
+
   const { groq_key } = req.body;
   if (!groq_key) {
     return res.status(400).json({ error: 'groq_key is required' });
   }
 
-  const offer = db.prepare('SELECT * FROM offers WHERE id = ?').get(req.params.id);
+  const offer = db.prepare('SELECT * FROM offers WHERE id = ?').get(id);
   if (!offer) {
     return res.status(404).json({ error: 'Offer not found' });
   }
@@ -346,7 +355,7 @@ Devuelve EXCLUSIVAMENTE este JSON:
       ai.perfil_afin,
       ai.score,
       ai.razon_score,
-      req.params.id
+      id
     );
 
     // Auto-discard offers with score <= 6
