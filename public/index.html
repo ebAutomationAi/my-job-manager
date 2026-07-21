@@ -617,30 +617,98 @@
           const rowDiv = document.createElement('div');
           rowDiv.className = `offer-row ${offer.status || 'pending'}`;
 
-          const scoreClass = getScoreBadgeClass(offer.ai_score);
-          const scoreBadge = offer.ai_score !== null ? `<div class="score-badge ${scoreClass}">${offer.ai_score}</div>` : '<div class="score-badge none">—</div>';
+          // Create col-ett (company badge)
+          const colEtt = document.createElement('div');
+          colEtt.className = 'col-ett';
+          const ettBadge = document.createElement('div');
+          ettBadge.className = `ett-badge ${getEttBadgeClass(offer.ett_name)}`;
+          ettBadge.textContent = offer.ett_name.substring(0, 8);
+          colEtt.appendChild(ettBadge);
+          rowDiv.appendChild(colEtt);
 
-          const profileTag = offer.ai_profile ? offer.ai_profile : '—';
-          const modalityTag = offer.ai_modality ? offer.ai_modality : '—';
-          const salaryText = offer.ai_salary ? offer.ai_salary.substring(0, 15) : '—';
+          // Create col-date
+          const colDate = document.createElement('div');
+          colDate.className = 'col-date';
+          colDate.textContent = formatDate(offer.published_at);
+          rowDiv.appendChild(colDate);
 
-          rowDiv.innerHTML = `
-            <div class="col-ett">
-              <div class="ett-badge ${getEttBadgeClass(offer.ett_name)}">${offer.ett_name.substring(0, 8)}</div>
-            </div>
-            <div class="col-date">${formatDate(offer.published_at)}</div>
-            <div class="col-title" title="${offer.title}">${offer.title}</div>
-            <div class="col-score">${scoreBadge}</div>
-            <div class="col-profile"><span class="tag">${profileTag}</span></div>
-            <div class="col-modality"><span class="tag">${modalityTag}</span></div>
-            <div class="col-salary"><span style="color: #999;">${salaryText}</span></div>
-            <div class="col-actions">
-              <button class="action-btn open" onclick="openOffer('${offer.url}', '${offer.ett_name}', ${offer.id})">🔗</button>
-              <button class="action-btn yes" onclick="updateOfferStatus(${offer.id}, 'interesante')">✅</button>
-              <button class="action-btn no" onclick="updateOfferStatus(${offer.id}, 'descartada')">❌</button>
-            </div>
-          `;
+          // Create col-title (SAFE: textContent, setAttribute)
+          const colTitle = document.createElement('div');
+          colTitle.className = 'col-title';
+          colTitle.textContent = offer.title;
+          colTitle.setAttribute('title', offer.title);
+          rowDiv.appendChild(colTitle);
 
+          // Create col-score
+          const colScore = document.createElement('div');
+          colScore.className = 'col-score';
+          if (offer.ai_score !== null) {
+            const scoreBadge = document.createElement('div');
+            const scoreClass = getScoreBadgeClass(offer.ai_score);
+            scoreBadge.className = `score-badge ${scoreClass}`;
+            scoreBadge.textContent = offer.ai_score;
+            colScore.appendChild(scoreBadge);
+          } else {
+            const scoreBadge = document.createElement('div');
+            scoreBadge.className = 'score-badge none';
+            scoreBadge.textContent = '—';
+            colScore.appendChild(scoreBadge);
+          }
+          rowDiv.appendChild(colScore);
+
+          // Create col-profile
+          const colProfile = document.createElement('div');
+          colProfile.className = 'col-profile';
+          const profileSpan = document.createElement('span');
+          profileSpan.className = 'tag';
+          profileSpan.textContent = offer.ai_profile ? offer.ai_profile : '—';
+          colProfile.appendChild(profileSpan);
+          rowDiv.appendChild(colProfile);
+
+          // Create col-modality
+          const colModality = document.createElement('div');
+          colModality.className = 'col-modality';
+          const modalitySpan = document.createElement('span');
+          modalitySpan.className = 'tag';
+          modalitySpan.textContent = offer.ai_modality ? offer.ai_modality : '—';
+          colModality.appendChild(modalitySpan);
+          rowDiv.appendChild(colModality);
+
+          // Create col-salary
+          const colSalary = document.createElement('div');
+          colSalary.className = 'col-salary';
+          const salarySpan = document.createElement('span');
+          salarySpan.style.color = '#999';
+          salarySpan.textContent = offer.ai_salary ? offer.ai_salary.substring(0, 15) : '—';
+          colSalary.appendChild(salarySpan);
+          rowDiv.appendChild(colSalary);
+
+          // Create col-actions (SAFE: addEventListener instead of inline onclick)
+          const colActions = document.createElement('div');
+          colActions.className = 'col-actions';
+
+          // Open button
+          const openBtn = document.createElement('button');
+          openBtn.className = 'action-btn open';
+          openBtn.textContent = '🔗';
+          openBtn.addEventListener('click', () => openOffer(offer.url, offer.ett_name, offer.id));
+          colActions.appendChild(openBtn);
+
+          // Yes button
+          const yesBtn = document.createElement('button');
+          yesBtn.className = 'action-btn yes';
+          yesBtn.textContent = '✅';
+          yesBtn.addEventListener('click', () => updateOfferStatus(offer.id, 'interesante'));
+          colActions.appendChild(yesBtn);
+
+          // No button
+          const noBtn = document.createElement('button');
+          noBtn.className = 'action-btn no';
+          noBtn.textContent = '❌';
+          noBtn.addEventListener('click', () => updateOfferStatus(offer.id, 'descartada'));
+          colActions.appendChild(noBtn);
+
+          rowDiv.appendChild(colActions);
           offersDiv.appendChild(rowDiv);
         });
 
